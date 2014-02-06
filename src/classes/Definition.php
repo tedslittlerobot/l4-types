@@ -1,3 +1,4 @@
+<?php namespace Tlr\Types;
 <?php namespace Velox\Content\Type;
 
 use InvalidArgumentException;

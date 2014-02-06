@@ -13,8 +13,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Tlr\\Type\\": "src/Type/",
-            "Tlr\\Content\\": "src/Content/"
+            "Tlr\\Types\\": "src/classes/"
         }
     },
     "minimum-stability": "stable"

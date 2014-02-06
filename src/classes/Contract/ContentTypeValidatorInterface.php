@@ -1,4 +1,4 @@
-<?php namespace Velox\Content\Type\Contracts;
+<?php namespace Tlr\Types\Contract;
 
 interface ContentTypeValidatorInterface {
 

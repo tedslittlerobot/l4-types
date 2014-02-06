@@ -1,3 +1,4 @@
+<?php namespace Tlr\Types;
 <?php namespace Velox\Content\Type;
 
 use Velox\Content\Type\Definition;
@@ -22,6 +23,11 @@ class Collection implements ArrayAccess {
 		}
 	}
 
+	/**
+	 * Get a type by key, or all types
+	 * @param  string $key
+	 * @return Definition | array
+	 */
 	public function types( $key = null )
 	{
 		if ( is_null($key) )
@@ -102,6 +108,11 @@ class Collection implements ArrayAccess {
 		throw new InvalidArgumentException("Cannot find type '$key'");
 	}
 
+	/**
+	 * Find a definition by model
+	 * @param  string $model
+	 * @return Definition
+	 */
 	public function findByModel( $key )
 	{
 		foreach ($this->items as $type)

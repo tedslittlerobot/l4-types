@@ -1,3 +1,4 @@
+<?php namespace Tlr\Types;
 <?php namespace Velox\Content;
 
 use Velox;
@@ -6,7 +7,7 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Content extends Eloquent {
 
-	protected $fillable = [ 'title', 'slug', 'language_id', 'author_id' ];
+	protected $fillable = [ 'title', 'slug', 'language_id', 'author_id', 'published_at' ];
 
 	protected $softDelete = true;
 
@@ -22,7 +23,8 @@ class Content extends Eloquent {
 
 	public function scopeOfType( $query, Definition $type )
 	{
-		return $query->where('content_type', $type->classname('model'));
+
+		return $query->where('content_type', $type->slug());
 	}
 
 	/**
@@ -60,6 +62,34 @@ class Content extends Eloquent {
 	public function tags()
 	{
 		return $this->morphToMany( 'Velox\Content\Tag', 'taggable' );
+	}
+
+	/**
+	 * Return the fully qualified relation class
+	 * @param  string $slug
+	 * @return string
+	 */
+	public function getContentTypeAttribute( $slug )
+	{
+		return Velox::type( $slug )->type();
+	}
+
+	/**
+	 * Mutate a type defintion into a type slug for saving in database
+	 * @param  string $slug
+	 * @return string
+	 */
+	public function setContentTypeAttribute( $slug )
+	{
+		if ( $slug instanceof Definition )
+		{
+			return $this->attributes[ 'content_type' ] = $slug->slug();
+		}
+
+		if ( is_string($slug) )
+		{
+			return $this->attributes[ 'content_type' ] = Velox::type( $slug )->slug();
+		}
 	}
 
 	/**
