@@ -9,12 +9,27 @@
     ],
     "require": {
         "php": ">=5.3.0",
-        "illuminate/support": "4.1.*"
+        "illuminate/support": "4.1.*",
+        "illuminate/database": "4.1.*",
+        "tlr/l4-support": "dev-master"
     },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/tedslittlerobot/l4-support"
+        },
+        {
+            "type": "git",
+            "url": "https://github.com/tedslittlerobot/l4-routing"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "Tlr\\Types\\": "src/classes/"
         }
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+    "require-dev": {
+        "mockery/mockery": "dev-master"
+    }
 }
