@@ -1,8 +1,6 @@
 <?php namespace Tlr\Types;
-<?php namespace Velox\Content;
 
 use Velox;
-use Velox\Content\Type\Definition;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Content extends Eloquent {

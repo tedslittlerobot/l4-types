@@ -1,5 +1,4 @@
 <?php namespace Tlr\Types;
-<?php namespace Velox\Content\Type;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 

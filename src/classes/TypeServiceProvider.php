@@ -13,7 +13,6 @@ class TypeServiceProvider extends ServiceProvider {
 
 	/**
 	 * Kick off the router using events
-	 * @return [type] [description]
 	 */
 	public function boot()
 	{

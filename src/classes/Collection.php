@@ -1,7 +1,5 @@
 <?php namespace Tlr\Types;
-<?php namespace Velox\Content\Type;
 
-use Velox\Content\Type\Definition;
 use InvalidArgumentException;
 use ArrayAccess;
 
@@ -56,7 +54,7 @@ class Collection implements ArrayAccess {
 			return $this;
 		}
 
-		throw new InvalidArgumentException("The second argument (definition) provided to ContentTypeCollection is not a valid definition");
+		throw new InvalidArgumentException("The second argument ($definition) provided to ContentTypeCollection is not a valid definition");
 	}
 
 	/**************************
