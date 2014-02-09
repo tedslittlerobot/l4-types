@@ -46,3 +46,56 @@ return array(
 ```
 
 This array is where you can register content types. See below for an example.
+
+## An Example
+
+Let's say that we want a mix of blog posts, image galleries and videos. We could have the following config file:
+
+```php
+<?php
+
+return array(
+	'types' => array(
+		'default' => array(
+			'posts' => array(
+				'classes' => array(
+					'model' => 'Post',
+				),
+				'views' => array(
+					'preview' => 'posts.preview',
+					'fields' => 'posts.fields',
+				),
+			),
+			'galleries' => array(
+				'classes' => array(
+					'model' => 'Gallery',
+				),
+				'views' => array(
+					'preview' => 'galleries.preview',
+					'fields' => 'galleries.fields',
+				),
+			),
+			'videos' => array(
+				'classes' => array(
+					'model' => 'Video',
+				),
+				'views' => array(
+					'preview' => 'videos.preview',
+					'fields' => 'videos.fields',
+				),
+			),
+		),
+	),
+);
+```
+
+Then, we can access the following:
+
+```php
+$class = TypeSet::type('posts')->classname('model'); // returns 'Post'
+$content = new $class; // instantiates a new Post object
+TypeSet::type(); // returns an array of types that you can loop over
+```
+
+@todo polymorph relationships
+@todo repository class
