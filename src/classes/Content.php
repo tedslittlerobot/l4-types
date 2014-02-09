@@ -1,7 +1,7 @@
 <?php namespace Tlr\Types;
 
-use Velox;
 use Illuminate\Database\Eloquent\Model as Eloquent;
+use Tlr\Types\Facades\TypeSet;
 
 class Content extends Eloquent {
 
@@ -21,7 +21,6 @@ class Content extends Eloquent {
 
 	public function scopeOfType( $query, Definition $type )
 	{
-
 		return $query->where('content_type', $type->slug());
 	}
 
@@ -69,7 +68,7 @@ class Content extends Eloquent {
 	 */
 	public function getContentTypeAttribute( $slug )
 	{
-		return Velox::type( $slug )->type();
+		return TypeSet::type( $slug )->type();
 	}
 
 	/**
@@ -86,7 +85,7 @@ class Content extends Eloquent {
 
 		if ( is_string($slug) )
 		{
-			return $this->attributes[ 'content_type' ] = Velox::type( $slug )->slug();
+			return $this->attributes[ 'content_type' ] = TypeSet::type( $slug )->slug();
 		}
 	}
 
@@ -96,6 +95,6 @@ class Content extends Eloquent {
 	 */
 	public function getTypeAttribute()
 	{
-		return Velox::type( $this->attributes['content_type'] );
+		return TypeSet::type( $this->attributes['content_type'] );
 	}
 }
