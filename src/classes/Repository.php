@@ -131,10 +131,7 @@ class Repository extends Repo {
 
 		$relatedValPasses = $this->getRepository()->validate();
 
-		if ( $valPasses && $relatedValPasses )
-			return true;
-
-		return false;
+		return ( $valPasses && $relatedValPasses );
 	}
 
 	/**
