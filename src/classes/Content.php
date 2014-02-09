@@ -7,8 +7,6 @@ class Content extends Eloquent {
 
 	protected $fillable = [ 'title', 'slug', 'language_id', 'author_id', 'published_at' ];
 
-	protected $softDelete = true;
-
 	/**
 	 * The Content Type
 	 * @author Stef Horner       (shorner@wearearchitect.com)
@@ -21,44 +19,7 @@ class Content extends Eloquent {
 
 	public function scopeOfType( $query, Definition $type )
 	{
-		return $query->where('content_type', $type->slug());
-	}
-
-	/**
-	 * The Language
-	 * @author Stef Horner       (shorner@wearearchitect.com)
-	 * @return Illuminate\Database\Eloquent\Relations\BelongsTo
-	 */
-	public function language()
-	{
-		return $this->belongsTo( 'Velox\I18n\Language' );
-	}
-
-	/**
-	 * The Author
-	 * @return Illuminate\Database\Eloquent\Relations\BelongsTo
-	 */
-	public function author()
-	{
-		return $this->belongsTo( 'Velox\Auth\User', 'author_id' );
-	}
-
-	/**
-	 * The Category
-	 * @return Illuminate\Database\Eloquent\Relations\BelongsTo
-	 */
-	public function category()
-	{
-		return $this->belongsTo( 'Velox\Content\Category' );
-	}
-
-	/**
-	 * The Tags
-	 * @return Illuminate\Database\Eloquent\Relations\BelongsToMany
-	 */
-	public function tags()
-	{
-		return $this->morphToMany( 'Velox\Content\Tag', 'taggable' );
+		return $query->where('content_type', $type);
 	}
 
 	/**
@@ -80,21 +41,13 @@ class Content extends Eloquent {
 	{
 		if ( $slug instanceof Definition )
 		{
-			return $this->attributes[ 'content_type' ] = $slug->slug();
+			return $this->attributes[ 'content_type' ] = (string)$slug;
 		}
 
 		if ( is_string($slug) )
 		{
-			return $this->attributes[ 'content_type' ] = TypeSet::type( $slug )->slug();
+			return $this->attributes[ 'content_type' ] = (string)TypeSet::type( $slug );
 		}
 	}
 
-	/**
-	 * Convert content_type to type definition
-	 * @return Velox\Content\Type\Definition
-	 */
-	public function getTypeAttribute()
-	{
-		return TypeSet::type( $this->attributes['content_type'] );
-	}
 }
