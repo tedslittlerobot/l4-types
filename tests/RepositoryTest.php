@@ -4,7 +4,7 @@ use Mockery as m;
 
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Facades\App;
 
 class RepositoryTest extends \PHPUnit_Framework_TestCase {
 
@@ -25,6 +25,7 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase {
 		$this->repo = new Tlr\Types\Repository( $this->model );
 
 		$this->repo->type($this->type);
+		$this->repo->save();
 	}
 
 	protected function inputData()
@@ -34,9 +35,17 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase {
 
 	protected function expectToGetRepo($count = 1)
 	{
-		$this->type->shouldReceive('repository')
+		$this->type->shouldReceive('classname')
+			->with('repository')
+			->times($count)
+			->andReturn( 'repositoryClass' );
+
+		App::shouldReceive('make')
+			->with('repositoryClass')
 			->times($count)
 			->andReturn( $this->typeRepo );
+
+		return $this->typeRepo;
 	}
 
 	protected function expectToValidate( $passes = true, $typePasses = true )
