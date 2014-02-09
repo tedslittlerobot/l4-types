@@ -77,5 +77,25 @@ class Definition {
 		return $this->slug;
 	}
 
+	public function __get($key)
+	{
+		$matches = array();
+
+		if (preg_match('/^([A-Za-z]*)Class$/', $key, $matches))
+		{
+			$match = $matches[1];
+
+			return $this->classname( str_replace( '_', '-', snake_case($match) ) );
+		}
+
+		if (preg_match('/^([A-Za-z]*)View$/', $key, $matches))
+		{
+			$match = $matches[1];
+
+			return $this->view( str_replace( '_', '-', snake_case($match) ) );
+		}
+
+		return $this->config( str_replace( '_', '-', snake_case($key) ) );
+	}
 
 }
