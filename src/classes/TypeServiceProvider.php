@@ -16,6 +16,7 @@ class TypeServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
+		$this->package('tlr/l4-types');
 	}
 
 	/**
