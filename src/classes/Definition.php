@@ -4,15 +4,6 @@ use InvalidArgumentException;
 
 class Definition {
 
-	protected static $_classes = [
-		'model',
-		'repository',
-	];
-
-	protected static $_views = array(
-		'fields',
-	);
-
 	protected $name;
 	protected $slug;
 	protected $classes = array();
@@ -27,23 +18,6 @@ class Definition {
 		$this->classes = $classes;
 		$this->views = $views;
 		$this->config = $config;
-
-		foreach( static::$_classes as $name )
-		{
-			if (!isset($this->classes[$name]))
-			{
-				throw new InvalidArgumentException("Content Type Definition for '{$this->name}' must have a class defined for key '$name'");
-			}
-		}
-
-		foreach( static::$_views as $name )
-		{
-			if (!isset($this->views[$name]))
-			{
-				throw new InvalidArgumentException("Content Type Definition for '{$this->name}' must have a view defined for key '$name'");
-			}
-		}
-
 	}
 
 	/**
@@ -92,32 +66,6 @@ class Definition {
 	public function config( $key )
 	{
 		return $this->config[ $key ];
-	}
-
-	/**
-	 * The model class
-	 * @return string
-	 */
-	public function model()
-	{
-		return $this->resolve('model');
-	}
-
-	/**
-	 * The model class
-	 * @return string
-	 */
-	public function type()
-	{
-		return $this->classname('model');
-	}
-	/**
-	 * The fields view identifier
-	 * @return string
-	 */
-	public function fields()
-	{
-		return $this->view('fields');
 	}
 
 	/**
