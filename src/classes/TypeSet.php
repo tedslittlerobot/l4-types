@@ -3,7 +3,7 @@
 use InvalidArgumentException;
 use ArrayAccess;
 
-class Collection implements ArrayAccess {
+class TypeSet implements ArrayAccess {
 
 	/**
 	 * The Content Type Definitions
@@ -50,11 +50,11 @@ class Collection implements ArrayAccess {
 
 		if ( is_array( $definition ) )
 		{
-			$this->items[$key] = new Definition( $this->app, $definition['name'], $key, $definition['classes'], $definition['views'], $definition['config'] );
+			$this->items[$key] = new Definition( $definition['name'], $key, $definition['classes'], $definition['views'], $definition['config'] );
 			return $this;
 		}
 
-		throw new InvalidArgumentException("The second argument ($definition) provided to ContentTypeCollection is not a valid definition");
+		throw new InvalidArgumentException("The second argument ($definition) provided to Tlr\Types\TypeSet@add is not a valid definition");
 	}
 
 	/**************************

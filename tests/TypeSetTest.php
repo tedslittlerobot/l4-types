@@ -2,7 +2,7 @@
 
 use Mockery as m;
 
-class TypeCollectionTest extends \PHPUnit_Framework_TestCase {
+class TypeSetTest extends \PHPUnit_Framework_TestCase {
 
 	public function tearDown()
 	{
@@ -13,7 +13,7 @@ class TypeCollectionTest extends \PHPUnit_Framework_TestCase {
 	{
 		$this->app = m::mock('Application');
 
-		$this->collection = new Tlr\Types\Collection( $this->app );
+		$this->typeset = new Tlr\Types\TypeSet( $this->app );
 	}
 
 	/**
@@ -25,9 +25,9 @@ class TypeCollectionTest extends \PHPUnit_Framework_TestCase {
 	{
 		$definition = $this->definition();
 
-		$this->collection['woop'] = $definition;
+		$this->typeset['woop'] = $definition;
 
-		$this->assertSame( $definition, $this->collection['woop'] );
+		$this->assertSame( $definition, $this->typeset['woop'] );
 	}
 
 	/**
@@ -49,10 +49,10 @@ class TypeCollectionTest extends \PHPUnit_Framework_TestCase {
 			'config' => array(),
 		);
 
-		$this->collection->add('key', $definition);
+		$this->typeset->add('key', $definition);
 
-		$this->assertTrue( $this->collection['key'] instanceof Tlr\Types\Definition );
-		$this->assertSame( 'foo', $this->collection['key']->name() );
+		$this->assertTrue( $this->typeset['key'] instanceof Tlr\Types\Definition );
+		$this->assertSame( 'foo', $this->typeset['key']->name() );
 	}
 
 	/**
@@ -60,7 +60,7 @@ class TypeCollectionTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testAssignmentError()
 	{
-		$this->collection->add('woop', 'woop');
+		$this->typeset->add('woop', 'woop');
 	}
 
 	public function testConstructorAssignment()
@@ -70,29 +70,29 @@ class TypeCollectionTest extends \PHPUnit_Framework_TestCase {
 			'bar' => $this->definition(),
 			'baz' => $this->definition(),
 		);
-		$this->collection = new Tlr\Types\Collection( $this->app, $types );
+		$this->typeset = new Tlr\Types\TypeSet( $this->app, $types );
 
 		foreach ($types as $type => $definition) {
-			$this->assertTrue( isset( $this->collection[$type] ) );
+			$this->assertTrue( isset( $this->typeset[$type] ) );
 		}
 	}
 
 	public function testIsSet()
 	{
-		$this->collection['woop'] = $this->definition();
+		$this->typeset['woop'] = $this->definition();
 
-		$this->assertFalse( isset($this->collection['foo']) );
+		$this->assertFalse( isset($this->typeset['foo']) );
 
-		$this->assertTrue( isset($this->collection['woop']) );
+		$this->assertTrue( isset($this->typeset['woop']) );
 	}
 
 	public function testUnset()
 	{
-		$this->collection['woop'] = $this->definition();
+		$this->typeset['woop'] = $this->definition();
 
-		unset($this->collection['woop']);
+		unset($this->typeset['woop']);
 
-		$this->assertFalse( isset($this->collection['woop']) );
+		$this->assertFalse( isset($this->typeset['woop']) );
 	}
 
 	public function testFindByModelWithArrayAccess()
