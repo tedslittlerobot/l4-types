@@ -15,18 +15,9 @@ class Definition {
 		$this->name = (string) $name;
 		$this->slug = (string) $slug;
 
-		$this->classes = $classes;
-		$this->views = $views;
-		$this->config = $config;
-	}
-
-	/**
-	 * Start a new query for content of this type
-	 * @return Illuminate\Database\Eloquent\Builder
-	 */
-	public function query()
-	{
-		return Content::where( 'type', $this->model );
+		$this->classes = (array) $classes;
+		$this->views = (array) $views;
+		$this->config = (array) $config;
 	}
 
 	/**
@@ -35,7 +26,7 @@ class Definition {
 	 */
 	public function __toString()
 	{
-		return json_encode($this);
+		return $this->slug;
 	}
 
 	/**
