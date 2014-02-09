@@ -27,10 +27,10 @@ class TypeServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		$this->app['content-types'] = $this->app->bindShared(function()
+		$this->app->bindShared('content-types', function()
 		{
 			$default = $this->app['config']->get('types.default');
-			$types = array_get( $this->app['config']->get('types.types') );
+			$types = $this->app['config']->get('types.types');
 
 			return new TypesManager( $default, $types );
 		});
