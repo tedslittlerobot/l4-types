@@ -24,7 +24,7 @@ class TypeSet implements ArrayAccess {
 	 * @param  string $key
 	 * @return Definition | array
 	 */
-	public function types( $key = null )
+	public function type( $key = null )
 	{
 		if ( is_null($key) )
 			return $this->items;
@@ -95,27 +95,7 @@ class TypeSet implements ArrayAccess {
 	 */
 	public function offsetGet ( $key )
 	{
-		if (isset($this->items[$key]))
-			return $this->items[$key];
-
-		if ($type = $this->findByModel($key))
-			return $type;
-
-		throw new InvalidArgumentException("Cannot find type '$key'");
-	}
-
-	/**
-	 * Find a definition by model
-	 * @param  string $model
-	 * @return Definition
-	 */
-	public function findByModel( $key )
-	{
-		foreach ($this->items as $type)
-		{
-			if ( $type->classname('model') == $key )
-				return $type;
-		}
+		return $this->items[$key];
 	}
 
 }
