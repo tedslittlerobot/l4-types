@@ -19,10 +19,8 @@ class Definition {
 	protected $config = array();
 	protected $views = array();
 
-	public function __construct( $app, $name, $slug, array $classes, array $views, array $config )
+	public function __construct( $name, $slug, array $classes, array $views, array $config )
 	{
-		$this->app = $app;
-
 		$this->name = (string) $name;
 		$this->slug = (string) $slug;
 
@@ -77,16 +75,6 @@ class Definition {
 	}
 
 	/**
-	 * Resolve a class
-	 * @param  string $key
-	 * @return string
-	 */
-	public function resolve( $key )
-	{
-		return $this->app->make( $this->classname( $key ) );
-	}
-
-	/**
 	 * Get a view from the array
 	 * @param  string $key
 	 * @return string
@@ -123,16 +111,6 @@ class Definition {
 	{
 		return $this->classname('model');
 	}
-
-	/**
-	 * The repository class
-	 * @return string
-	 */
-	public function repository()
-	{
-		return $this->resolve('repository');
-	}
-
 	/**
 	 * The fields view identifier
 	 * @return string
