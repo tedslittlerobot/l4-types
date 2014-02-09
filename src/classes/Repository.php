@@ -76,19 +76,31 @@ class Repository extends Repo {
 	public function create()
 	{
 		if ( ! $this->validate() )
+		{
 			return null;
+		}
 
-		$this->related = $this->type()->model();
+		$class = $this->type()->model();
+		$this->related = new $class;
 
 		$this->fill();
-
-		DB::transaction(function()
-		{
-			$this->related = $this->getRepository()->create( $this->related, $this->data(), $this->file() );
-			$this->related->parent()->save($this->model);
-		});
+		$this->save();
 
 		return $this->model;
+	}
+
+	public function save( $method = null )
+	{
+		if ( is_null($method) )
+		{
+			$method = debug_backtrace()[1]['function'];
+		}
+
+		DB::transaction(function() use ( $method )
+		{
+			$this->related = $this->getRepository()->$method( $this->related, $this->data(), $this->file() );
+			$this->related->parent()->save($this->model);
+		});
 	}
 
 	/**
@@ -104,7 +116,7 @@ class Repository extends Repo {
 		$this->related = $this->model->content;
 
 		$this->fill();
-		// $this->fill()->repository->update();
+		$this->save();
 
 		return $this->model;
 	}
