@@ -17,16 +17,19 @@ class TypeDefinitionTest extends \PHPUnit_Framework_TestCase {
 		$this->classes = array(
 			'foo' => 'fooClass',
 			'bar' => 'barClass',
+			'foo-bar' => 'fooBarClass',
 		);
 
 		$this->views = array(
 			'foo' => 'fooView',
 			'bar' => 'barView',
+			'foo-bar' => 'fooBarView',
 		);
 
 		$this->config = array(
 			'foo' => 'fooConfig',
 			'bar' => 'barConfig',
+			'foo-bar' => 'fooBarConfig',
 		);
 
 		$this->definition = new Tlr\Types\Definition( $this->name, $this->slug, $this->classes, $this->views, $this->config );
