@@ -1,6 +1,7 @@
 <?php namespace Tlr\Types;
 
 use Illuminate\Support\ServiceProvider;
+use Tlr\Types\TypesManager;
 
 class TypeServiceProvider extends ServiceProvider {
 
@@ -24,16 +25,15 @@ class TypeServiceProvider extends ServiceProvider {
 	 *
 	 * @return void
 	 */
-	public function register() {}
-
-	/**
-	 * Get the services provided by the provider.
-	 *
-	 * @return array
-	 */
-	public function provides()
+	public function register()
 	{
-		return array();
+		$this->app['content-types'] = $this->app->bindShared(function()
+		{
+			$default = $this->app['config']->get('types.default');
+			$types = array_get( $this->app['config']->get('types.types') );
+
+			return new TypesManager( $default, $types );
+		});
 	}
 
 }
