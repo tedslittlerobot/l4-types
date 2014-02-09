@@ -90,7 +90,7 @@ class TypesManager {
 	 */
 	public function __call( $method, $params )
 	{
-		return call_user_func_array( array($this->typeSet(), $method), $parameters );
+		return call_user_func_array( array($this->typeSet(), $method), $params );
 	}
 
 }
