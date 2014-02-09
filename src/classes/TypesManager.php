@@ -72,7 +72,7 @@ class TypesManager {
 			$this->defaultKey = $key;
 		}
 
-		// @TODO: throw exception
+		throw new \InvalidArgumentsException("The default typeset key cannot be set to `$key`, as no such typeset exists.");
 	}
 
 	/**
