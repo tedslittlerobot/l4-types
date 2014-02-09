@@ -25,7 +25,6 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase {
 		$this->repo = new Tlr\Types\Repository( $this->model );
 
 		$this->repo->type($this->type);
-		$this->repo->save();
 	}
 
 	protected function inputData()
