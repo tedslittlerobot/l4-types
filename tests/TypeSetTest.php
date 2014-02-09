@@ -25,7 +25,7 @@ class TypeSetTest extends \PHPUnit_Framework_TestCase {
 
 		$this->typeset['woop'] = $definition;
 
-		$this->assertSame( $definition, $this->typeset['woop'] );
+		$this->assertSame( $definition, $this->typeset->type('woop') );
 	}
 
 	/**
@@ -91,16 +91,6 @@ class TypeSetTest extends \PHPUnit_Framework_TestCase {
 		unset($this->typeset['woop']);
 
 		$this->assertFalse( isset($this->typeset['woop']) );
-	}
-
-	public function testFindByModelWithArrayAccess()
-	{
-		$this->assertTrue(true);
-	}
-
-	public function testFindByModel()
-	{
-		$this->assertTrue(true);
 	}
 
 	protected function definition()
