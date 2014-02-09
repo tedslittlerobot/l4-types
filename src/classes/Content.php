@@ -41,12 +41,12 @@ class Content extends Eloquent {
 	{
 		if ( $slug instanceof Definition )
 		{
-			return $this->attributes[ 'content_type' ] = (string)$slug;
+			return $this->attributes[ 'content_type' ] = (string) $slug;
 		}
 
 		if ( is_string($slug) )
 		{
-			return $this->attributes[ 'content_type' ] = (string)TypeSet::type( $slug );
+			return $this->attributes[ 'content_type' ] = (string) TypeSet::type( $slug );
 		}
 	}
 
