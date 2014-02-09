@@ -11,10 +11,8 @@ class TypeSet implements ArrayAccess {
 	 */
 	protected $items = array();
 
-	public function __construct( $app, $config = array() )
+	public function __construct( $config = array() )
 	{
-		$this->app = $app;
-
 		foreach ( $config as $key => $definition )
 		{
 			$this->add( $key, $definition );

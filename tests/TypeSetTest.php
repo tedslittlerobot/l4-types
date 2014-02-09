@@ -11,9 +11,7 @@ class TypeSetTest extends \PHPUnit_Framework_TestCase {
 
 	public function setUp()
 	{
-		$this->app = m::mock('Application');
-
-		$this->typeset = new Tlr\Types\TypeSet( $this->app );
+		$this->typeset = new Tlr\Types\TypeSet;
 	}
 
 	/**
@@ -70,7 +68,7 @@ class TypeSetTest extends \PHPUnit_Framework_TestCase {
 			'bar' => $this->definition(),
 			'baz' => $this->definition(),
 		);
-		$this->typeset = new Tlr\Types\TypeSet( $this->app, $types );
+		$this->typeset = new Tlr\Types\TypeSet( $types );
 
 		foreach ($types as $type => $definition) {
 			$this->assertTrue( isset( $this->typeset[$type] ) );
