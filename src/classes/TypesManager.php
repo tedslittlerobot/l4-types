@@ -4,15 +4,18 @@ class TypesManager {
 
 	protected $typesets = array();
 
-	protected $defaultKey = 'default';
+	protected $defaultKey;
 
-	public function __construct( array $typesets )
+	public function __construct( $default = 'default', array $typesets )
 	{
+		$this->defaultKey = $default;
+
 		// If the default key is not in the typesets array, use the
 		// key of the first typeset
 		if ( ! isset($typesets[$this->defaultKey]) )
 		{
-			$this->defaultKey = reset($typesets);
+			reset($typesets);
+			$this->defaultKey = key($typesets);
 		}
 
 		// loop and add typesets
@@ -35,11 +38,6 @@ class TypesManager {
 			return $this->getDefaultTypeSet();
 		}
 
-		if ( ! isset($namespace) )
-		{
-			$this->makeTypeSet( $namespace, $config );
-		}
-
 		return $this->typesets[$namespace];
 	}
 
@@ -50,7 +48,7 @@ class TypesManager {
 	 */
 	public function addTypeSet( $key, array $types )
 	{
-		$this->typesets[$key] = new TypeSet( $types );
+		return $this->typesets[$key] = new TypeSet( $types );
 	}
 
 	/**
@@ -59,7 +57,7 @@ class TypesManager {
 	 */
 	public function getDefaultTypeSet()
 	{
-		return $this->typesets[$defaultKey];
+		return $this->typesets[$this->defaultKey];
 	}
 
 	/**
@@ -72,7 +70,7 @@ class TypesManager {
 			$this->defaultKey = $key;
 		}
 
-		throw new \InvalidArgumentsException("The default typeset key cannot be set to `$key`, as no such typeset exists.");
+		return $this;
 	}
 
 	/**
