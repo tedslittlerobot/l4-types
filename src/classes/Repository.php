@@ -4,6 +4,7 @@ use Tlr\Support\Repository as Repo;
 
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\App;
 
 class Repository extends Repo {
 
@@ -44,7 +45,9 @@ class Repository extends Repo {
 	public function type( Definition $definition = null )
 	{
 		if ( is_null($definition) )
+		{
 			return $this->definition;
+		}
 
 		$this->definition = $definition;
 
@@ -59,7 +62,9 @@ class Repository extends Repo {
 	public function getRepository()
 	{
 		if ( is_null($this->repository) )
-			$this->repository = $this->definition->repository();
+		{
+			$this->repository = App::make( $this->definition->classname('repository') );
+		}
 
 		return $this->repository;
 	}
