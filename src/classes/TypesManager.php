@@ -12,7 +12,7 @@ class TypesManager {
 
 		// If the default key is not in the typesets array, use the
 		// key of the first typeset
-		if ( ! isset($typesets[$this->defaultKey]) )
+		if ( ! isset($typesets[$this->defaultKey]) && count($typesets) > 0 )
 		{
 			reset($typesets);
 			$this->defaultKey = key($typesets);
