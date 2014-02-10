@@ -10,7 +10,7 @@ class Repository extends Repo {
 
 	protected $rules = array(
 		'title' => 'required',
-		'slug' => 'required',
+		'slug' => 'required|unique:contents',
 	);
 
 	/**
@@ -56,7 +56,6 @@ class Repository extends Repo {
 
 	/**
 	 * Get the repository object
-	 * @author Stef Horner       (shorner@wearearchitect.com)
 	 * @return RepositoryInterface
 	 */
 	public function getRepository()
@@ -110,7 +109,9 @@ class Repository extends Repo {
 	public function update( Content $content )
 	{
 		if ( ! $this->validate() )
+		{
 			return null;
+		}
 
 		$this->model = $content;
 		$this->related = $this->model->content;
