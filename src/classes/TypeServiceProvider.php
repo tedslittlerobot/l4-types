@@ -36,4 +36,15 @@ class TypeServiceProvider extends ServiceProvider {
 		});
 	}
 
+	/**
+	 * Override method for more shallow file structure
+	 * @inheritdoc
+	 */
+	public function guessPackagePath()
+	{
+		$path = with(new \ReflectionClass($this))->getFileName();
+
+		return realpath(dirname($path).'/../');
+	}
+
 }
