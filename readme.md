@@ -59,11 +59,12 @@ return array(
 		'default' => array(
 			'posts' => array(
 				'classes' => array(
-					'model' => 'Post',
+					'model' => 'Tlr\Types\Article\Article',
+					'repository' => 'Tlr\Types\Article\ArticleRepository',
 				),
 				'views' => array(
-					'preview' => 'posts.preview',
-					'fields' => 'posts.fields',
+					'preview' => 'article.preview',
+					'fields' => 'article.fields',
 				),
 			),
 			'galleries' => array(
