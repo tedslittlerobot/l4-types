@@ -10,7 +10,7 @@ abstract class Model extends Eloquent {
 	 */
 	public function parent()
 	{
-		return $this->morphOne('Velox\Content\Content', 'content', 'content_type');
+		return $this->morphOne('Tlr\Types\Content', 'content');
 	}
 
 }
