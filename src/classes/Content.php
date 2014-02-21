@@ -23,13 +23,13 @@ class Content extends Eloquent {
 	}
 
 	/**
-	 * Return the fully qualified relation class
+	 * Return the class of the related modal
 	 * @param  string $slug
 	 * @return string
 	 */
 	public function getContentTypeAttribute( $slug )
 	{
-		return TypeSet::type( $slug )->type();
+		return $this->type->modalClass;
 	}
 
 	/**
@@ -37,16 +37,16 @@ class Content extends Eloquent {
 	 * @param  string $slug
 	 * @return string
 	 */
-	public function setContentTypeAttribute( $slug )
+	public function setContentTypeAttribute( $classname )
 	{
 		if ( $slug instanceof Definition )
 		{
 			return $this->attributes[ 'content_type' ] = (string) $slug;
 		}
 
-		if ( is_string($slug) )
+		if ( is_string($classname) )
 		{
-			return $this->attributes[ 'content_type' ] = (string) TypeSet::type( $slug );
+			return $this->attributes[ 'content_type' ] = (string) TypeSet::findByKey( $slug, 'modalClass' );
 		}
 	}
 
