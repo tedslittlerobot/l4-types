@@ -33,6 +33,22 @@ class TypeSet implements ArrayAccess {
 	}
 
 	/**
+	 * Find a content definition by the given key
+	 * @param  string $needle
+	 * @param  string $key
+	 * @return Definition
+	 */
+	public function findByKey( $needle, $key )
+	{
+		if ( $definition = array_find_dot($needle, $this->items, $key) )
+		{
+			return $definition;
+		}
+
+		throw new \InvalidArgumentException("Cannot find definition with key $key => $needle");
+	}
+
+	/**
 	 * Add a new definition
 	 * @author Stef Horner (shorner@wearearchitect.com)
 	 * @param  string $key

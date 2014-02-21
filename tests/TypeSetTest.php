@@ -98,4 +98,25 @@ class TypeSetTest extends \PHPUnit_Framework_TestCase {
 		return m::mock('Tlr\Types\Definition');
 	}
 
+	public function testFindByKey()
+	{
+		$foo = $this->definition();
+		$bar = $this->definition();
+
+		$foo->baz = 'fooBaz';
+		$bar->baz = 'barBaz';
+
+		$foo->woop = 'fooWoop';
+		$bar->woop = 'barWoop';
+
+		$this->typeset->add('foo', $foo);
+		$this->typeset->add('bar', $bar);
+
+		$result = $this->typeset->findByKey('fooBaz', 'baz');
+		$this->assertSame( $foo, $result );
+
+		$result = $this->typeset->findByKey('barWoop', 'woop');
+		$this->assertSame( $bar, $result );
+	}
+
 }
