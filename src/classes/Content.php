@@ -18,8 +18,14 @@ class Content extends Eloquent {
 	}
 
 	public function scopeOfType( $query, Definition $type )
+
+	/**
+	 * Get the type definition
+	 * @return Definition
+	 */
+	public function getTypeAttribute()
 	{
-		return $query->where('content_type', $type);
+		return TypeSet::type( $this->attributes['content_type'] );
 	}
 
 	/**
