@@ -5,7 +5,7 @@ use Tlr\Types\Facades\TypeSet;
 
 class Content extends Eloquent {
 
-	protected $fillable = [ 'title', 'slug', 'language_id', 'author_id', 'published_at' ];
+	protected $fillable = [ 'title', 'slug', 'published_at' ];
 
 	/**
 	 * The Content Type
