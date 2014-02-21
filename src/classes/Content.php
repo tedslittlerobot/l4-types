@@ -17,7 +17,27 @@ class Content extends Eloquent {
 		return $this->morphTo();
 	}
 
-	public function scopeOfType( $query, Definition $type )
+	/**
+	 * Narrow the query down by type, passing an optional parameter to filter by that subquery
+	 * @param  QueryBuilder     $query
+	 * @param  Definition $type
+	 * @param  Closure     $subQuery
+	 * @return QueryBuilder
+	 */
+	public function scopeOfType( $query, Definition $type, \Closure $subQuery = null )
+	{
+		$query->where('content_type', $type);
+
+		if ( ! is_null($query) )
+		{
+			$query->whereHas('content', function( $q ) use ($subQuery)
+			{
+				$subQuery($q);
+			});
+		}
+
+		return $query;
+	}
 
 	/**
 	 * Get the type definition
