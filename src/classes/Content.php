@@ -1,6 +1,7 @@
 <?php namespace Tlr\Types;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
+use Tlr\Types\Facades\TypeSet as TypeSetFacade;
 
 class Content extends Eloquent {
 
@@ -44,7 +45,7 @@ class Content extends Eloquent {
 	 */
 	public function getTypeAttribute()
 	{
-		return TypeSet::type( $this->attributes['content_type'] );
+		return TypeSetFacade::type( $this->attributes['content_type'] );
 	}
 
 	/**
@@ -64,14 +65,14 @@ class Content extends Eloquent {
 	 */
 	public function setContentTypeAttribute( $classname )
 	{
-		if ( $slug instanceof Definition )
+		if ( $classname instanceof Definition )
 		{
-			return $this->attributes[ 'content_type' ] = (string) $slug;
+			return $this->attributes[ 'content_type' ] = (string) $classname;
 		}
 
 		if ( is_string($classname) )
 		{
-			return $this->attributes[ 'content_type' ] = (string) TypeSet::findByKey( $slug, 'modalClass' );
+			return $this->attributes[ 'content_type' ] = (string) TypeSetFacade::findByKey( $classname, 'modalClass' );
 		}
 	}
 
