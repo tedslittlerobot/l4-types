@@ -49,13 +49,13 @@ class Content extends Eloquent {
 	}
 
 	/**
-	 * Return the class of the related modal
+	 * Return the class of the related model
 	 * @param  string $slug
 	 * @return string
 	 */
 	public function getContentTypeAttribute( $slug )
 	{
-		return $this->type->modalClass;
+		return $this->type->modelClass;
 	}
 
 	/**
@@ -72,7 +72,7 @@ class Content extends Eloquent {
 
 		if ( is_string($classname) )
 		{
-			return $this->attributes[ 'content_type' ] = (string) TypeSetFacade::findByKey( $classname, 'modalClass' );
+			return $this->attributes[ 'content_type' ] = (string) TypeSetFacade::findByKey( $classname, 'modelClass' );
 		}
 	}
 
