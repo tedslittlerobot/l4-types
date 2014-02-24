@@ -1,7 +1,6 @@
 <?php namespace Tlr\Types;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
-use Tlr\Types\Facades\TypeSet;
 
 class Content extends Eloquent {
 
