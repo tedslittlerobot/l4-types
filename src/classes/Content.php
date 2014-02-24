@@ -70,10 +70,7 @@ class Content extends Eloquent {
 			return $this->attributes[ 'content_type' ] = (string) $classname;
 		}
 
-		if ( is_string($classname) )
-		{
-			return $this->attributes[ 'content_type' ] = (string) TypeSetFacade::findByKey( $classname, 'modelClass' );
-		}
+		return $this->attributes[ 'content_type' ] = (string) TypeSetFacade::findByKey( $classname, 'modelClass' );
 	}
 
 }
