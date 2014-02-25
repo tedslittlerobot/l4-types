@@ -125,4 +125,20 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase {
 		$this->assertSame( $messageBag, $this->repo->getErrors() );
 	}
 
+	public function testCreateFailsValdiation()
+	{
+		$this->expectToGetRepo();
+		$this->expectToValidate(false, false);
+		$this->assertNull($this->repo->create());
+	}
+
+	public function testUpdateFailsValdiation()
+	{
+		$this->expectToGetRepo();
+		$this->expectToValidate(false, false);
+
+		$content = $this->getContent();
+
+		$this->assertNull( $this->repo->update($content) );
+	}
 }
