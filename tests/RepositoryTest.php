@@ -96,7 +96,7 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase {
 		$this->expectToGetRepo();
 		$this->expectToValidate();
 
-		$this->assertSame( true, $this->repo->validate() );
+		$this->assertTrue( $this->repo->validate() );
 	}
 
 	public function testFailedTypeValidation()
@@ -104,7 +104,7 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase {
 		$this->expectToGetRepo();
 		$this->expectToValidate(true, false);
 
-		$this->assertSame( false, $this->repo->validate() );
+		$this->assertFalse( $this->repo->validate() );
 	}
 
 	public function testErrorRetrieval()
@@ -121,7 +121,7 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase {
 
 		$this->val->shouldReceive('getMessageBag')->andReturn($messageBag);
 
-		$this->assertSame( false, $this->repo->validate() );
+		$this->assertFalse( $this->repo->validate() );
 		$this->assertSame( $messageBag, $this->repo->getErrors() );
 	}
 
