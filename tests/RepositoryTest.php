@@ -66,6 +66,13 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase {
 		$this->typeRepo->shouldReceive('validate')->andReturn($typePasses);
 	}
 
+	protected function getContent()
+	{
+		$content = m::mock('Tlr\Types\Content');
+
+		return $content;
+	}
+
 	/**
 	 * Test the type assignment has worked
 	 */
