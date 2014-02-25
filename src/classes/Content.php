@@ -7,6 +7,8 @@ class Content extends Eloquent {
 
 	protected $fillable = [ 'title', 'slug', 'published_at' ];
 
+	protected $_typeSet;
+
 	/**
 	 * The Content Type
 	 * @author Stef Horner       (shorner@wearearchitect.com)
@@ -45,7 +47,12 @@ class Content extends Eloquent {
 	 */
 	public function getTypeAttribute()
 	{
-		return TypeSetFacade::type( $this->attributes['content_type'] );
+		if ( ! $this->_typeSet )
+		{
+			return TypeSetFacade::type( $this->attributes['content_type'] );
+		}
+
+		return TypeSetFacade::typeSet($this->_typeSet)->type( $this->attributes['content_type'] );
 	}
 
 	/**
@@ -70,7 +77,12 @@ class Content extends Eloquent {
 			return $this->attributes[ 'content_type' ] = (string) $classname;
 		}
 
-		return $this->attributes[ 'content_type' ] = (string) TypeSetFacade::findByKey( $classname, 'modelClass' );
+		if ( ! $this->_typeSet )
+		{
+			return $this->attributes[ 'content_type' ] = (string) TypeSetFacade::findByKey( $classname, 'modelClass' );
+		}
+
+		return $this->attributes[ 'content_type' ] = (string) TypeSetFacade::typeSet($this->_typeSet)->findByKey( $classname, 'modelClass' );
 	}
 
 }
