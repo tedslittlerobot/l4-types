@@ -22,15 +22,15 @@ class Content extends Eloquent {
 	/**
 	 * Narrow the query down by type, passing an optional parameter to filter by that subquery
 	 * @param  QueryBuilder     $query
-	 * @param  Definition $type
+	 * @param  mixed $type
 	 * @param  Closure     $subQuery
 	 * @return QueryBuilder
 	 */
-	public function scopeOfType( $query, Definition $type, \Closure $subQuery = null )
+	public function scopeOfType( $query, $type, $subQuery = null )
 	{
 		$query->where('content_type', $type);
 
-		if ( ! is_null($query) )
+		if ( is_callable($query) )
 		{
 			$query->whereHas('content', function( $q ) use ($subQuery)
 			{
