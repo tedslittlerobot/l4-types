@@ -28,7 +28,14 @@ class Content extends Eloquent {
 	 */
 	public function scopeOfType( $query, $type, $subQuery = null )
 	{
-		$query->where('content_type', $type);
+		if (is_array($type))
+		{
+			$query->whereIn('content_type', $type);
+		}
+		else
+		{
+			$query->where('content_type', $type);
+		}
 
 		if ( is_callable($query) )
 		{
