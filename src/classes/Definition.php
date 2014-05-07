@@ -98,4 +98,25 @@ class Definition {
 		return $this->config( str_replace( '_', '-', snake_case($key) ) );
 	}
 
+	public function __isset($key)
+	{
+		$matches = array();
+
+		if (preg_match('/^([A-Za-z]*)Class$/', $key, $matches))
+		{
+			$match = $matches[1];
+
+			return isset($this->classes[ str_replace( '_', '-', snake_case($match) ) ]);
+		}
+
+		if (preg_match('/^([A-Za-z]*)View$/', $key, $matches))
+		{
+			$match = $matches[1];
+
+			return isset($this->views[ str_replace( '_', '-', snake_case($match) ) ]);
+		}
+
+		return isset($this->config[ str_replace( '_', '-', snake_case($key) ) ]);
+	}
+
 }
