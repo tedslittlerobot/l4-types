@@ -126,7 +126,7 @@ class Repository extends Repo {
 	 * Validate both models
 	 * @return boolean
 	 */
-	public function validate()
+	public function validate($input = null, $rules = null)
 	{
 		$valPasses = parent::validate();
 
